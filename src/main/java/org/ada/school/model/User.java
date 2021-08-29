@@ -1,48 +1,104 @@
 package org.ada.school.model;
 
-import org.ada.school.dto.UserDto;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
+import org.ada.school.dto.UserDto;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class User
+@Document
+public class User implements Serializable {
 
-{
+  @Id
+  String id;
 
-    String id;
+  String name;
 
-    String name;
+  @Indexed(unique = true)
+  String email;
 
-    String email;
+  String lastName;
 
-    String lastName;
+  Date createdAt;
 
-    Date createdAt;
+  public User() {}
 
+  public User(UserDto userDto) {
+    id = UUID.randomUUID().toString();
+    name = userDto.getName();
+    lastName = userDto.getLastName();
+    email = userDto.getEmail();
+    createdAt = new Date();
+  }
 
-    public User( UserDto userDto )
-    {
-        id = UUID.randomUUID().toString();
-        name = userDto.getName();
-        lastName = userDto.getLastName();
-        email = userDto.getEmail();
-        createdAt = new Date();
-    }
+  public void update(UserDto userDto) {
+    name = userDto.getName();
+    lastName = userDto.getLastName();
+    email = userDto.getEmail();
+  }
 
-    public String getName()
-    {
-        return name;
-    }
+  public String getId() {
+    return this.id;
+  }
 
-    public String getId()
-    {
-        return id;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public void update( UserDto userDto )
-    {
-        name = userDto.getName();
-        lastName = userDto.getLastName();
-        email = userDto.getEmail();
-    }
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getEmail() {
+    return this.email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getLastName() {
+    return this.lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public Date getCreatedAt() {
+    return this.createdAt;
+  }
+
+  public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  @Override
+  public String toString() {
+    return (
+      "{" +
+      " id='" +
+      getId() +
+      "'" +
+      ", name='" +
+      getName() +
+      "'" +
+      ", email='" +
+      getEmail() +
+      "'" +
+      ", lastName='" +
+      getLastName() +
+      "'" +
+      ", createdAt='" +
+      getCreatedAt() +
+      "'" +
+      "}"
+    );
+  }
 }

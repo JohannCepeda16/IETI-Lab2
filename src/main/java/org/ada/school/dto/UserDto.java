@@ -1,29 +1,69 @@
 package org.ada.school.dto;
 
-public class UserDto
-{
-    String name;
+import java.io.Serializable;
 
-    String email;
+public class UserDto implements Serializable {
 
-    String lastName;
+  String name;
+  String email;
+  String lastName;
 
-    public UserDto()
-    {
-    }
 
-    public String getName()
-    {
-        return name;
-    }
+  public UserDto() {
+  }
 
-    public String getEmail()
-    {
-        return email;
-    }
+  public UserDto(String name, String email, String lastName) {
+    this.name = name;
+    this.email = email;
+    this.lastName = lastName;
+  }
 
-    public String getLastName()
-    {
-        return lastName;
-    }
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getEmail() {
+    return this.email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getLastName() {
+    return this.lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public UserDto name(String name) {
+    setName(name);
+    return this;
+  }
+
+  public UserDto email(String email) {
+    setEmail(email);
+    return this;
+  }
+
+  public UserDto lastName(String lastName) {
+    setLastName(lastName);
+    return this;
+  }
+
+  @Override
+  public String toString() {
+    return "{" +
+      " name='" + getName() + "'" +
+      ", email='" + getEmail() + "'" +
+      ", lastName='" + getLastName() + "'" +
+      "}";
+  }
+
 }
