@@ -1,5 +1,6 @@
 package org.ada.school.controller;
 
+import java.util.Date;
 import java.util.List;
 import org.ada.school.dto.UserDto;
 import org.ada.school.model.User;
@@ -33,6 +34,18 @@ public class UserController {
   @GetMapping("/{id}")
   public ResponseEntity<User> findById(@PathVariable String id) {
     return ResponseEntity.ok(userService.findById(id));
+  }
+
+  @GetMapping("/{queryText}")
+  public ResponseEntity<List<User>> findUsersWithNameOrLastNameLike(@PathVariable String queryText) {
+    return ResponseEntity.ok(
+      userService.findUsersWithNameOrLastNameLike(queryText)
+    );
+  }
+
+  @GetMapping("/{statDate}")
+  public ResponseEntity<List<User>> findUsersCreatedAfter(Date startDate) {
+    return ResponseEntity.ok(userService.findUsersCreatedAfter(startDate));
   }
 
   @PostMapping

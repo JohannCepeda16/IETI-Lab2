@@ -1,5 +1,6 @@
 package org.ada.school.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.ada.school.dto.UserDto;
@@ -27,6 +28,16 @@ public class UserServiceMongoDB implements UserService {
     Optional<User> user = userRepository.findById(id);
     if (user.isPresent()) return user.get();
     return null;
+  }
+
+  @Override
+  public List<User> findUsersWithNameOrLastNameLike(String queryText) {
+    return userRepository.findUsersWithNameOrLastNameLike(queryText);
+  }
+
+  @Override
+  public List<User> findUsersCreatedAfter(Date startDate) {
+    return userRepository.findUsersCreatedAfter(startDate);
   }
 
   @Override
